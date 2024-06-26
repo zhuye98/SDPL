@@ -3,8 +3,8 @@ The official repo for [MICCAI'24] [**"Symptom Disentanglement in Chest X-ray Ima
 # Introduction
 We propose a multi-stage framework to model the complex progression from symptom perspective. Specifically, we introduce two consecutive modules namely Symptom Disentangler (SD) and Symptom Progression Learner (SPL) to learn from static diagnosis to dynamic disease development. 
 # Methods
-<img src="figs/sdpl_1.png"  width="70%" />
-<img src="figs/sdpl_2.png"  width="65%" />
+<img src="figs/sdpl_1.png"  width="80%" />
+
 
 
 ## Installation
