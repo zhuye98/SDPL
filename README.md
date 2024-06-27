@@ -52,7 +52,7 @@ Three files are generated, including:
 - **symptom_label_chexpert.json.** The dictionary of symptom labels {dicom_id: symptom_list}, i.e. "dicom_id": [NaN, 0.0, NaN, NaN, 0.0, 1.0, NaN, 0.0];
 - **progression_label.json.** The dictionary of symptom labels {dicom_id_cur_dicom_id_pri: progression_label_list}, i.e. "dicom_id_cur_dicom_id_pri": [NaN, NaN, NaN, NaN, NaN, NaN, NaN, 2.0], which indicates 'no change' of symptom 'Pneumonia'.
 
-Step 3: Regerate the split:
+Step 3: Regenerate the split:
 ```
 python data_processing/regenerate_split.py
 ```
