@@ -1,5 +1,5 @@
 # Symptom Disentanglement in Chest X-ray Images for Fine-Grained Progression Learning
-The official repo for [MICCAI'24] [**"Symptom Disentanglement in Chest X-ray Images for Fine-Grained Progression Learning"**](https://papers.miccai.org/miccai-2024/751-Paper3074.html)
+The official repo for [MICCAI'24] "[**Symptom Disentanglement in Chest X-ray Images for Fine-Grained Progression Learning**]"(https://papers.miccai.org/miccai-2024/751-Paper3074.html)
 # Introduction
 We propose a multi-stage framework to model the complex progression from symptom perspective. Specifically, we introduce two consecutive modules namely Symptom Disentangler (SD) and Symptom Progression Learner (SPL) to learn from static diagnosis to dynamic disease development. 
 # Methods
