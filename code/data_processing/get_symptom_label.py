@@ -57,21 +57,26 @@ for idx, row in tqdm(filtered_df_train.iterrows(), total=filtered_df_train.shape
     study_id_cur = data_cur[1]
     study_id_pre = data_pre[1]
 
-    # check corresponding symptoms
+    # check corresponding symptoms (fixed, missing records will be filled with NaN)
     try:
         cxr_symptoms_cur = df_cxr_symptoms.loc[df_cxr_symptoms['study_id']==study_id_cur][['Lung Opacity', 'Pleural Effusion', 'Atelectasis', 'Cardiomegaly', 'Edema', 'Pneumothorax', 'Consolidation', 'Pneumonia', 'No Finding']].values.tolist()[0]
         if cxr_symptoms_cur[-1] == 1:
             cxr_symptoms_cur = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         else:
             cxr_symptoms_cur = cxr_symptoms_cur[:-1]
+    except IndexError:
+        not_ava_study_ids.append(study_id_cur)
+        cxr_symptoms_cur = [np.nan] * 8
+        
+    try:
         cxr_symptoms_pre = df_cxr_symptoms.loc[df_cxr_symptoms['study_id']==study_id_pre][['Lung Opacity', 'Pleural Effusion', 'Atelectasis', 'Cardiomegaly', 'Edema', 'Pneumothorax', 'Consolidation', 'Pneumonia', 'No Finding']].values.tolist()[0]
         if cxr_symptoms_pre[-1] == 1:
             cxr_symptoms_pre = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         else:
             cxr_symptoms_pre = cxr_symptoms_pre[:-1]
     except IndexError:
-        not_ava_study_ids.append(study_id_cur)
-        continue
+        not_ava_study_ids.append(study_id_pre)
+        cxr_symptoms_pre = [np.nan] * 8
 
     # replace the '-1' with 1 in the lists (cxr_symptoms_cur and cxr_symptoms_pre)
     cxr_symptoms_cur = [1.0 if x == -1 else x for x in cxr_symptoms_cur]
@@ -112,21 +117,26 @@ for idx, row in tqdm(filtered_df_val.iterrows(), total=filtered_df_val.shape[0])
     study_id_cur = data_cur[1]
     study_id_pre = data_pre[1]
 
-    # check corresponding symptoms
+    # check corresponding symptoms (fixed, missing records will be filled with NaN)
     try:
         cxr_symptoms_cur = df_cxr_symptoms.loc[df_cxr_symptoms['study_id']==study_id_cur][['Lung Opacity', 'Pleural Effusion', 'Atelectasis', 'Cardiomegaly', 'Edema', 'Pneumothorax', 'Consolidation', 'Pneumonia', 'No Finding']].values.tolist()[0]
         if cxr_symptoms_cur[-1] == 1:
             cxr_symptoms_cur = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         else:
             cxr_symptoms_cur = cxr_symptoms_cur[:-1]
+    except IndexError:
+        not_ava_study_ids.append(study_id_cur)
+        cxr_symptoms_cur = [np.nan] * 8
+        
+    try:
         cxr_symptoms_pre = df_cxr_symptoms.loc[df_cxr_symptoms['study_id']==study_id_pre][['Lung Opacity', 'Pleural Effusion', 'Atelectasis', 'Cardiomegaly', 'Edema', 'Pneumothorax', 'Consolidation', 'Pneumonia', 'No Finding']].values.tolist()[0]
         if cxr_symptoms_pre[-1] == 1:
             cxr_symptoms_pre = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         else:
             cxr_symptoms_pre = cxr_symptoms_pre[:-1]
     except IndexError:
-        not_ava_study_ids.append(study_id_cur)
-        continue
+        not_ava_study_ids.append(study_id_pre)
+        cxr_symptoms_pre = [np.nan] * 8
     
     data_cur.extend(cxr_symptoms_cur)
     data_pre.extend(cxr_symptoms_pre)
@@ -163,21 +173,26 @@ for idx, row in tqdm(filtered_df_test.iterrows(), total=filtered_df_test.shape[0
     study_id_cur = data_cur[1]
     study_id_pre = data_pre[1]
 
-    # check corresponding symptoms
+    # check corresponding symptoms (fixed, missing records will be filled with NaN)
     try:
         cxr_symptoms_cur = df_cxr_symptoms.loc[df_cxr_symptoms['study_id']==study_id_cur][['Lung Opacity', 'Pleural Effusion', 'Atelectasis', 'Cardiomegaly', 'Edema', 'Pneumothorax', 'Consolidation', 'Pneumonia', 'No Finding']].values.tolist()[0]
         if cxr_symptoms_cur[-1] == 1:
             cxr_symptoms_cur = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         else:
             cxr_symptoms_cur = cxr_symptoms_cur[:-1]
+    except IndexError:
+        not_ava_study_ids.append(study_id_cur)
+        cxr_symptoms_cur = [np.nan] * 8
+        
+    try:
         cxr_symptoms_pre = df_cxr_symptoms.loc[df_cxr_symptoms['study_id']==study_id_pre][['Lung Opacity', 'Pleural Effusion', 'Atelectasis', 'Cardiomegaly', 'Edema', 'Pneumothorax', 'Consolidation', 'Pneumonia', 'No Finding']].values.tolist()[0]
         if cxr_symptoms_pre[-1] == 1:
             cxr_symptoms_pre = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         else:
             cxr_symptoms_pre = cxr_symptoms_pre[:-1]
     except IndexError:
-        not_ava_study_ids.append(study_id_cur)
-        continue
+        not_ava_study_ids.append(study_id_pre)
+        cxr_symptoms_pre = [np.nan] * 8
     
     data_cur.extend(cxr_symptoms_cur)
     data_pre.extend(cxr_symptoms_pre)
