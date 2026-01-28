@@ -14,13 +14,13 @@ import json
 
 """
 Dataset folder structure:
-├─previous_image
-├─post_image
+├─previous_image (B) # According to the data_processing/make3folders.py, the previous images are placed under the folder B
+├─post_image (A)     # And the current images are placed under the folder A
 ├─label
 └─list - train.txt,test.txt, val.txt
 """
-IMG_FOLDER_NAME = "A"
-IMG_POST_FOLDER_NAME = 'B'
+IMG_POST_FOLDER_NAME = "A"
+IMG_FOLDER_NAME = 'B'
 DATASET_PATH_PREFIX = '~/physionet.org/files/chest-imagenome/1.0.0/data/'
 LIST_FOLDER_NAME = 'my_list' # list: original split; my_list: new_split_exclude_all_nan
 ANNOT_FOLDER_NAME = "label"
@@ -98,8 +98,8 @@ class ImageDataset(data.Dataset):
 
     def __getitem__(self, index):
         name = self.img_name_list[index]
-        A_path = get_prev_image_path(self.root_dir, self.img_name_list[index % self.A_size])
-        B_path = get_post_image_path(self.root_dir, self.img_name_list[index % self.A_size])
+        A_path = get_post_image_path(self.root_dir, self.img_name_list[index % self.A_size])
+        B_path = get_prev_image_path(self.root_dir, self.img_name_list[index % self.A_size])
 
         try:
             img = np.asarray(Image.open(A_path).convert('RGB'))
@@ -140,8 +140,8 @@ class CDDataset(ImageDataset):
 
     def __getitem__(self, index):
         name = self.img_name_list[index]
-        A_path = get_prev_image_path(self.root_dir, self.img_name_list[index % self.A_size])
-        B_path = get_post_image_path(self.root_dir, self.img_name_list[index % self.A_size])
+        A_path = get_post_image_path(self.root_dir, self.img_name_list[index % self.A_size])
+        B_path = get_prev_image_path(self.root_dir, self.img_name_list[index % self.A_size])
         img = np.asarray(Image.open(A_path).convert('RGB'))
         img_B = np.asarray(Image.open(B_path).convert('RGB'))
 
